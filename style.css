@@ -28,3 +28,8 @@
     line-height: 25px;
     margin-bottom: 0px;
 }
+
+canvas
+{
+    border-radius: 2px;
+}
