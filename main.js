@@ -57,12 +57,26 @@ function gotPoses(results)
   }
 }
 
+function preload()
+{
+  ball_hit = loadSound("ball_touch_paddel.wav");
+  missed = loadSound("missed.wav");
+}
+
 function startGame()
 {
   game_status = "start";
   document.getElementById("status").innerHTML = "Game Is Loaded";
    //Set the value of the status variable created in step 1 to “start”.
  //Update the h3 tag which we have created inside index.html file in project 138 who has id “status” to "Game Is Loaded”.
+}
+
+function restart()
+{
+
+  pcscore = 0;
+  playerscore = 0;
+  loop();
 }
 
 function draw(){
@@ -168,13 +182,19 @@ function move(){
   if (ball.x-2.5*ball.r/2< 0){
   if (ball.y >= paddle1Y&& ball.y <= paddle1Y + paddle1Height) {
     ball.dx = -ball.dx+0.5; 
+
+    ball_hit.play();
     
   }
   else{
     pcscore++;
+
+    
+    missed.play();
     
     reset();
     navigator.vibrate(100);
+
   }
 }
 if(pcscore ==4){
@@ -185,7 +205,7 @@ if(pcscore ==4){
     stroke("white");
     textSize(25);
     text("Game Over!",width/2,height/2);
-    text("Reload the page!",width/2,height/2+30)
+    text("Press Restart Button To Play Again!",width/2,height/2+30)
     noLoop();
     pcscore = 0;
  }
